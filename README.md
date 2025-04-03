@@ -1,59 +1,72 @@
-# JsonCompareApp
+# Json Compare App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+A modern web application that allows users to compare and visualize differences between JSON objects. Built with Angular and Tailwind CSS.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **JSON Comparison**: Easily compare two JSON objects and see their differences
+- **Visual Differences**: Clear visualization of added, removed, and changed values
+- **Dark/Light Mode**: Support for both dark and light themes with automatic detection of system preferences
+- **Responsive Design**: Works well on all device sizes
+- **Format JSON**: Automatically format and prettify JSON inputs
+- **Visitor Tracking**: Anonymous visitor count tracking
+- **Real-time Updates**: Uses Angular's signal-based reactivity for instant feedback
 
-```bash
-ng serve
-```
+## Technologies Used
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Angular 19**: Latest version with signals for state management
+- **Tailwind CSS 4**: For responsive and utility-first styling
+- **TypeScript**: For type-safe code
+- **RxJS**: For handling asynchronous operations
 
-## Code scaffolding
+## Getting Started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
 
-```bash
-ng generate component component-name
-```
+- Node.js (v18+)
+- npm (v9+)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Installation
 
-```bash
-ng generate --help
-```
+1. Clone the repository:
 
-## Building
+    ```bash
+    git clone https://github.com/manthanank/json-compare-app.git 
+    cd json-compare-app
+    ```
 
-To build the project run:
+2. Navigate to the project directory:
 
-```bash
-ng build
-```
+   ```bash
+   cd json-compare-app
+   ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+3. Install dependencies:
 
-## Running unit tests
+   ```bash
+    npm install
+    ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+4. Start the development server:
 
-```bash
-ng test
-```
+    ```bash
+    npm start
+    ```
 
-## Running end-to-end tests
+5. Open your browser and navigate to `http://localhost:4200`
+6. You should see the application running.
 
-For end-to-end (e2e) testing, run:
+## Usage
 
-```bash
-ng e2e
-```
+1. Paste your source JSON in the left textarea
+2. Paste your target JSON in the right textarea
+3. Click "Compare JSON" to see the differences
+4. Toggle between dark and light mode using the icon in the upper right
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Building for Production
 
-## Additional Resources
+Run `npm run build` to build the project for production. The build artifacts will be stored in the `dist/` directory.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## License
+
+This project is open source and available under the MIT License.
