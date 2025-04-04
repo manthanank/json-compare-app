@@ -1,111 +1,85 @@
-<div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors duration-300">
-  <header
-    class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white py-4 shadow-md transition-colors duration-300">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-      <div>
-        <h1 class="text-3xl font-bold">JSON Compare Tool</h1>
-        <p class="text-gray-600 dark:text-gray-300">Compare and visualize differences between JSON objects</p>
-      </div>
-
-      <div class="flex items-center gap-4">
-        <!-- Visitor count -->
-        <div class="flex items-center text-sm text-gray-600 dark:text-gray-300">
-          @if (isVisitorCountLoading()) {
-          <div class="flex items-center bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1">
-            <div class="animate-spin h-4 w-4 border-2 border-gray-500 rounded-full border-t-transparent mr-1"></div>
-            <span>Loading...</span>
-          </div>
-          } @else if (!visitorCountError()) {
-          <div class="flex items-center px-3 py-1" title="Unique visitors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-            <span>{{visitorCount()}} visitors</span>
-          </div>
-          } @else {
-          <div
-            class="flex items-center bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full px-3 py-1"
-            title="{{visitorCountError()}}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span>Error</span>
-          </div>
-          }
-        </div>
-
-        <!-- Theme toggle button -->
-        <button (click)="toggleTheme()"
-          class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none transition-colors duration-300"
-          aria-label="Toggle dark/light mode">
-          @if (darkMode()) {
-          <!-- Sun icon for light mode option -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          } @else {
-          <!-- Moon icon for dark mode option -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-          }
-        </button>
-      </div>
+<div class="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-gray-900">
+  <div class="container mx-auto max-w-6xl p-5 font-sans text-gray-800 dark:text-gray-200">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">JSON Compare Tool</h1>
+      <button (click)="toggleTheme()"
+        class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+        aria-label="Toggle dark/light mode">
+        @if (darkMode()) {
+        <!-- Sun icon for light mode -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        } @else {
+        <!-- Moon icon for dark mode -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+        }
+      </button>
     </div>
-  </header>
 
-  <main class="container mx-auto p-4 md:p-6 flex-grow">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Visitor count with new control flow syntax -->
+    <div class="text-center mb-5 text-sm text-gray-500 dark:text-gray-400">
+      @if (isVisitorCountLoading()) {
+      <span>Loading visitor count...</span>
+      } @else if (visitorCountError()) {
+      <span class="text-red-500 dark:text-red-400">{{ visitorCountError() }}</span>
+      } @else {
+      <span><strong>{{ visitorCount() }}</strong> visitors have used this tool</span>
+      }
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
       <!-- First JSON Input -->
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <div class="flex justify-between items-center mb-2">
-          <label class="block font-semibold text-gray-700 dark:text-gray-300">Source JSON:</label>
-          <button (click)="formatJson1()"
-            class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm"
-            [disabled]="!json1() || json1().trim() === ''" title="Format JSON">
-            Format
-          </button>
+      <div
+        class="flex flex-col border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-gray-800">
+        <div
+          class="flex justify-between items-center px-4 py-3 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
+          <h2 class="text-base font-medium text-gray-700 dark:text-gray-200">Source JSON</h2>
+          <div class="flex gap-2">
+            <button
+              class="px-3 py-1.5 bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-xs font-medium rounded transition"
+              (click)="formatJson1()" [disabled]="!json1() || json1().trim() === ''">Format</button>
+          </div>
         </div>
-        <textarea [value]="json1()" (input)="onTextareaInput1($event)"
-          class="w-full h-64 border border-gray-300 dark:border-gray-700 rounded-md p-3 font-mono text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Paste your first JSON here..."></textarea>
+        <textarea [value]="json1()" (input)="onTextareaInput1($event)" rows="15"
+          placeholder="Paste your first JSON here..."
+          class="flex-1 p-4 border-none font-mono text-sm leading-relaxed outline-none resize-none bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"></textarea>
       </div>
 
       <!-- Second JSON Input -->
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <div class="flex justify-between items-center mb-2">
-          <label class="block font-semibold text-gray-700 dark:text-gray-300">Target JSON:</label>
-          <button (click)="formatJson2()"
-            class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm"
-            [disabled]="!json2() || json2().trim() === ''" title="Format JSON">
-            Format
-          </button>
+      <div
+        class="flex flex-col border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-gray-800">
+        <div
+          class="flex justify-between items-center px-4 py-3 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
+          <h2 class="text-base font-medium text-gray-700 dark:text-gray-200">Target JSON</h2>
+          <div class="flex gap-2">
+            <button
+              class="px-3 py-1.5 bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-xs font-medium rounded transition"
+              (click)="formatJson2()" [disabled]="!json2() || json2().trim() === ''">Format</button>
+          </div>
         </div>
-        <textarea [value]="json2()" (input)="onTextareaInput2($event)"
-          class="w-full h-64 border border-gray-300 dark:border-gray-700 rounded-md p-3 font-mono text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Paste your second JSON here..."></textarea>
+        <textarea [value]="json2()" (input)="onTextareaInput2($event)" rows="15"
+          placeholder="Paste your second JSON here..."
+          class="flex-1 p-4 border-none font-mono text-sm leading-relaxed outline-none resize-none bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"></textarea>
       </div>
     </div>
 
     <!-- Error Message -->
     @if (error()) {
-    <div class="bg-red-100 dark:bg-red-900 border-l-4 border-red-500 text-red-700 dark:text-red-300 p-4 mb-6 rounded"
-      role="alert">
+    <div class="mt-5 p-4 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800" role="alert">
       <p>{{ error() }}</p>
     </div>
     }
 
-    <div class="flex justify-center gap-4 mb-6">
+    <div class="flex justify-center gap-4 my-6">
       <button (click)="compareJSON()"
-        class="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-md shadow-md transition duration-200 flex items-center"
+        class="px-5 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded shadow transition hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 disabled:pointer-events-none flex items-center"
         [disabled]="!json1() || !json2()">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd"
@@ -116,7 +90,7 @@
       </button>
 
       <button (click)="clearCompare()"
-        class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-bold py-3 px-8 rounded-md shadow-md transition duration-200 flex items-center"
+        class="px-5 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-medium rounded transition flex items-center disabled:opacity-50 disabled:pointer-events-none"
         [disabled]="!json1() && !json2() && !result()">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd"
@@ -129,17 +103,19 @@
 
     <!-- Result Display -->
     @if (result()) {
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-      <h2 class="text-xl font-bold text-gray-700 dark:text-gray-200 mb-3">Comparison Results</h2>
+    <div
+      class="flex flex-col border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-gray-800 mt-5">
       <div
-        class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md p-4 overflow-auto max-h-96">
-        <pre class="font-mono text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-200">{{ result() | json }}</pre>
+        class="flex justify-between items-center px-4 py-3 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
+        <h2 class="text-base font-medium text-gray-700 dark:text-gray-200">Comparison Results</h2>
       </div>
+      <pre
+        class="p-4 m-0 overflow-auto max-h-96 bg-white dark:bg-gray-800 font-mono text-sm leading-relaxed whitespace-pre-wrap break-words text-gray-800 dark:text-gray-200">{{ result() | json }}</pre>
     </div>
     }
-  </main>
 
-  <footer class="py-4 text-center text-gray-600 dark:text-gray-400 text-sm mt-auto">
-    <p>JSON Compare Tool &copy; {{currentYear()}}</p>
-  </footer>
+    <div class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8 pb-4">
+      JSON Compare Tool &copy; {{currentYear()}}
+    </div>
+  </div>
 </div>
